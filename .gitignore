@@ -1,0 +1,9 @@
+# Ignore everything
+*
+
+# Allow .config directory
+!.config/
+
+# Allow all files in .config directory
+!.config/**
+
