@@ -1,45 +1,55 @@
 #!/bin/bash
 
-# Update packages and install vim and tmux
-sudo apt update && sudo apt install -y vim tmux
+# Function to print messages
+print_message() {
+    echo "----------------------------------------"
+    echo $1
+    echo "----------------------------------------"
+}
 
-# Install Homebrew (if not installed)
-if ! command -v brew &> /dev/null
-then
-    echo "Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Update package lists and install necessary packages
+print_message "Updating package lists and installing necessary packages..."
+sudo apt update && sudo apt install -y git curl zsh tmux neovim
 
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+# Install Oh My Zsh
+print_message "Installing Oh My Zsh..."
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+else
+    print_message "Oh My Zsh is already installed."
 fi
 
-# Install fzf
-brew install fzf
+# Install tmux plugin manager
+print_message "Installing Tmux Plugin Manager (TPM)..."
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+else
+    print_message "Tmux Plugin Manager (TPM) is already installed."
+fi
 
-git clone https://github.com/junegunn/fzf-git.sh.git
+# Install vim-plug for Neovim
+print_message "Installing vim-plug for Neovim..."
+if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+else
+    print_message "vim-plug is already installed."
+fi
 
-source fzf-git.sh/fzf-git.sh
-source ~/.zshrc
+# Symlink configuration files
+print_message "Symlinking configuration files..."
+ln -sf ~/dev-env-files/.zshrc ~/.zshrc
+ln -sf ~/dev-env-files/.tmux.conf ~/.tmux.conf
+ln -sf ~/dev-env-files/.config/nvim ~/.config/nvim
 
-# Bat
-brew install bat
+# Set Zsh as the default shell
+print_message "Setting Zsh as the default shell..."
+if [ "$SHELL" != "$(which zsh)" ]; then
+    chsh -s $(which zsh)
+    print_message "Default shell changed to Zsh. Please log out and log back in to apply the changes."
+else
+    print_message "Zsh is already the default shell."
+fi
 
-# Eza
-brew install eza
-echo 'alias ls="eza --icons=always"' >> ~/.zshrc
+print_message "Setup complete!"
 
-# Delta
-brew install git-delta
-
-# TLDR
-brew install tldc
-
-# The Fuck
-brew install thefuck
-
-# Tmux
-brew install tmux
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
-# Reload configuration
-source ~/.zshrc
