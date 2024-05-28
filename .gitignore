@@ -3,6 +3,7 @@
 
 # Allow .config directory
 !.config/
+bootstrap.sh
 
 # Allow all files in .config directory
 !.config/**
