@@ -161,6 +161,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-For any questions or support, please contact me at [bodya.bodnarenko@gmail.com](mailto:bodya.bodnarenko@gmail.com).
+For any questions or support, please contact me.
 
 Happy coding!
