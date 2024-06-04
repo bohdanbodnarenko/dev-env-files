@@ -4,12 +4,21 @@ Welcome to my development environment configuration repository. This repository 
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Files](#files)
-- [Contributing](#contributing)
-- [License](#license)
+- [Development Environment Setup](#development-environment-setup)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+  - [Usage](#usage)
+  - [Tmux Configuration](#tmux-configuration)
+    - [Plugins](#plugins)
+    - [Plugins Installation](#plugins-installation)
+    - [Keybindings](#keybindings)
+    - [Custom Settings](#custom-settings)
+    - [Configuration File](#configuration-file)
+    - [Neovim Usage](#neovim-usage)
+  - [Files](#files)
+  - [Contributing](#contributing)
+  - [License](#license)
 
 ## Installation
 
@@ -51,31 +60,70 @@ After running the setup script, your development environment should be configure
 - **Tmux**: Terminal multiplexer to manage multiple terminal sessions.
 - **Wezterm**: Advanced terminal emulator with GPU acceleration.
 
-### Tmux Usage
+## Tmux Configuration
 
-- Start a new session:
+### Plugins
 
-    ```bash
-    tmux
-    ```
+This setup uses the following tmux plugins, managed by [Tmux Plugin Manager (TPM)](https://github.com/tmux-plugins/tpm):
 
-- Detach from a session:
+1. [tmux-plugins/tpm](https://github.com/tmux-plugins/tpm): Tmux Plugin Manager.
+2. [tmux-plugins/tmux-sensible](https://github.com/tmux-plugins/tmux-sensible): Basic tmux settings everyone can agree on.
+3. [tmux-plugins/tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect): Persists tmux environment across system restarts.
+4. [tmux-plugins/tmux-continuum](https://github.com/tmux-plugins/tmux-continuum): Continuous saving of tmux environment.
+5. [tmux-plugins/tmux-yank](https://github.com/tmux-plugins/tmux-yank): Copy to system clipboard.
+6. [tmux-plugins/tmux-prefix-highlight](https://github.com/tmux-plugins/tmux-prefix-highlight): Highlight when prefix is pressed.
+7. [tmux-plugins/tmux-pain-control](https://github.com/tmux-plugins/tmux-pain-control): Pain control for tmux.
+8. [tmux-plugins/tmux-copycat](https://github.com/tmux-plugins/tmux-copycat): Enhances tmux search functionality.
+9. [tmux-plugins/tmux-open](https://github.com/tmux-plugins/tmux-open): Open highlighted files or URLs.
 
-    ```bash
-    Ctrl+b d
-    ```
+### Plugins Installation
 
-- List sessions:
+To install the tmux plugins, ensure TPM is installed:
 
-    ```bash
-    tmux ls
-    ```
+```sh
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
 
-- Attach to a session:
+Then, press `prefix + I` (capital i, as in Install) in tmux to fetch the plugins.
 
-    ```bash
-    tmux attach-session -t <session-name>
-    ```
+### Keybindings
+
+Here are some custom keybindings used in this configuration:
+
+- **Prefix Key**: `C-a` (Control + a)
+- **Reload Tmux Configuration**: `prefix + r`
+- **Save and Restore Sessions**:
+  - **Save**: `prefix + Ctrl-s`
+  - **Restore**: `prefix + Ctrl-r`
+- **Pane Navigation**:
+  - **Move left**: `prefix + h`
+  - **Move down**: `prefix + j`
+  - **Move up**: `prefix + k`
+  - **Move right**: `prefix + l`
+- **Resize Panes**:
+  - **Left**: `prefix + Shift-h`
+  - **Down**: `prefix + Shift-j`
+  - **Up**: `prefix + Shift-k`
+  - **Right**: `prefix + Shift-l`
+- **Copy Mode**:
+  - **Enter copy mode**: `prefix + [`
+  - **Copy selection**: `prefix + y`
+- **Plugins**:
+  - **Open URLs**: `prefix + o`
+  - **Yank**: `prefix + y`
+  - **Highlight prefix**: `prefix + Space` (toggles highlighting)
+
+### Custom Settings
+
+This tmux configuration includes several custom settings to enhance your workflow:
+
+- **Mouse Mode**: Enabled for easier pane and window navigation.
+- **Status Bar**: Customized with useful information and a pleasing color scheme.
+- **Pane Management**: Efficient navigation and resizing keybindings.
+
+### Configuration File
+
+The .tmux.conf file in this repository includes all the above settings and more. Feel free to explore and customize it to fit your needs.
 
 ### Neovim Usage
 
@@ -116,4 +164,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 For any questions or support, please contact me at [bodya.bodnarenko@gmail.com](mailto:bodya.bodnarenko@gmail.com).
 
 Happy coding!
-
